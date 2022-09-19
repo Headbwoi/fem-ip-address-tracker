@@ -9,6 +9,37 @@ function App() {
             IP Address Tracker
           </h1>
         </header>
+
+        <section className="input">
+          <h2 className="sr-only">Search for any IP address or domain </h2>
+          <div className="w-full h-14 rounded-2xl relative overflow-hidden mb-6 md:mb-10 max-w-[34.6875rem] mx-auto">
+            <input
+              type="text"
+              name="ip"
+              className=" w-full h-full outline none px-5"
+              aria-label="Search for any IP address or domain "
+            />
+            <button
+              className="absolute top-0 right-0 w-[3.625rem] h-full bg-veryDarkGray grid place-items-center hover:bg-veryDarkGray/[0.85] cursor-pointer"
+              aria-label="click to track ip provided"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" width="11" height="14">
+                <path
+                  fill="none"
+                  stroke="#FFF"
+                  stroke-width="3"
+                  d="M2 1l6 6-6 6"
+                />
+              </svg>
+            </button>
+          </div>
+        </section>
+
+        <section className="ip-info">
+          <h3 className="sr-only">
+            information about the IP Address you provided
+          </h3>
+        </section>
       </div>
     </main>
   )
