@@ -11,7 +11,6 @@ node_modules
 dist
 dist-ssr
 *.local
-ip-address-tracker-master
 
 # Editor directories and files
 .vscode/*
