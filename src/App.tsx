@@ -3,7 +3,7 @@ import IpInfo from "./IpInfo"
 
 function App() {
   return (
-    <main className="w-full h-full relative before:absolute before:top-0 before:left-0 before:h-[18.75rem] lg:h-[17.5rem] before:w-screen before:bg-[url('./images/pattern-bg.png')]">
+    <main className="w-full h-full relative before:absolute before:top-0 before:left-0 before:h-[18.75rem] lg:h-[17.5rem] before:w-screen before:bg-[url('./images/pattern-bg.png')] before:bg-no-repeat before:bg-cover before:bg-center">
       <div className="container md:pt-8 px-6 md:px-10 lg:px-12 xl:px-0 relative">
         <header className="py-7 text-center">
           <h1 className="text-xl md:text-2xl lg:text-3xl text-white font-bold">
@@ -37,7 +37,7 @@ function App() {
           </div>
         </section>
 
-        <section className="ip-info">
+        <section className="ip-info absolute left-1/2 -translate-x-1/2 w-full max-w-[69.375rem]">
           <h3 className="sr-only">
             information about the IP Address you provided
           </h3>
