@@ -4,7 +4,7 @@ interface InfoDetails {
 }
 const IpInfo = () => {
   return (
-    <div className="w-full min-h-[13.75rem] md:h-[10.3125rem] mx-auto rounded-xl bg-white shadow-xl py-6 md:py-0 md:px-7 flex items-center flex-col gap-6 md:flex-row md:gap-10 ">
+    <div className="w-full max-w-[69.375rem] min-h-[13.75rem] md:h-[10.3125rem] mx-auto rounded-xl bg-white shadow-xl py-6 md:py-0 md:px-7 xl:px-10 flex items-center flex-col gap-6 md:flex-row md:gap-10 lg:gap-14 ">
       <IpInfoDetails title="IP Address" value="192.212.174.101" />
       <span className=" hidden md:block  w-[1px] h-20 bg-darkGray "></span>
       <IpInfoDetails title="Location" value="kano Ng" />

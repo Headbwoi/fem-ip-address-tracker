@@ -37,7 +37,7 @@ function App() {
           </div>
         </section>
 
-        <section className="ip-info absolute left-1/2 -translate-x-1/2 w-full max-w-[69.375rem]">
+        <section className="ip-info ">
           <h3 className="sr-only">
             information about the IP Address you provided
           </h3>
