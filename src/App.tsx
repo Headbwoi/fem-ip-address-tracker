@@ -17,7 +17,7 @@ function App() {
             <input
               type="text"
               name="ip"
-              className=" w-full h-full outline none px-5 font-medium placeholder:text-darkGray text-veryDarkGray placeholder:text-sm md:placeholder:text-base"
+              className=" w-full h-full outline none px-5 font-medium placeholder:text-darkGray text-veryDarkGray placeholder:text-sm md:placeholder:text-base placeholder:font-normal"
               placeholder="Search for any IP address or domain "
               aria-label="Search for any IP address or domain "
             />
