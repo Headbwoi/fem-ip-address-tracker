@@ -15,9 +15,7 @@ function App() {
   const [isp, setIsp] = useState("")
   const [map, setMap] = useState(undefined)
 
-  const BaseUrl = `https://geo.ipify.org/api/v2/country,city?apiKey=${
-    import.meta.env.VITE_GEO_API_KEY
-  }&ipAddress=${ipAddess}`
+  const BaseUrl = `https://geo.ipify.org/api/v2/country,city?apiKey=at_LPFa8WF3jZXIkqgaF0eI0dxGPHMbA&ipAddress=${ipAddess}`
 
   const fetchData = async () => {
     const res = await fetch(BaseUrl)
