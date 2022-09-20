@@ -29,7 +29,7 @@ Users should be able to:
 
 ### Links
 
-- Live Site URL: [Add live site URL here](https://ip-tracker-fem.netlify.app/)
+- Live Site URL: [live site](https://ip-tracker-fem.netlify.app/)
 
 ## My process
 
