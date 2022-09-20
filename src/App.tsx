@@ -1,5 +1,6 @@
 import { useState } from "react"
 import IpInfo from "./IpInfo"
+import { MapContainer, TileLayer, useMap } from "react-leaflet"
 
 interface Details {
   ip: string
