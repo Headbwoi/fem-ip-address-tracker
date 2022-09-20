@@ -1,5 +1,4 @@
 import { FormEvent, useEffect, useState } from "react"
-import axios from "axios"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 
 interface InfoDetails {
@@ -9,28 +8,19 @@ interface InfoDetails {
 
 function App() {
   const [ipAddess, setIpAddess] = useState("")
-  const [inputValue, setInputValue] = useState("")
   const [city, setCity] = useState("")
   const [country, setCountry] = useState("")
   const [timezone, setTimezone] = useState("")
   const [isp, setIsp] = useState("")
   const [map, setMap] = useState(undefined)
 
-  const BaseUrl = `https://geo.ipify.org/api/v2/country,city?apiKey=at_LPFa8WF3jZXIkqgaF0eI0dxGPHMbA&`
+  const BaseUrl = `https://geo.ipify.org/api/v2/country,city?apiKey=at_LPFa8WF3jZXIkqgaF0eI0dxGPHMbA&ipAddress=${ipAddess}`
 
   const fetchData = async () => {
     const res = await fetch(BaseUrl)
     const data = await res.json().catch((error) => {
       console.log(error)
     })
-    update(data)
-  }
-
-  useEffect(() => {
-    fetchData()
-  }, [])
-
-  const update = (data: any) => {
     const { city, country, timezone } = data.location
     setIpAddess(data.ip)
     setCity(city)
@@ -44,16 +34,13 @@ function App() {
     setMap({ lat, lng })
   }
 
-  const updateUi = async (ip: any) => {
-    //&ipAddress=${ipAddess}
-    const res = await fetch(BaseUrl + "ipAddress" + ip)
-    const json = await res.json()
-    update(json)
-  }
+  useEffect(() => {
+    fetchData()
+  }, [])
 
-  const handleSubmit = (e: FormEvent, inputValue: string) => {
+  const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
-    updateUi(inputValue)
+    fetchData()
   }
   return (
     <main className="w-full h-full relative before:absolute before:top-0 before:left-0 before:h-[18.75rem] lg:h-[17.5rem] before:w-screen before:bg-[url('/images/pattern-bg.png')] before:bg-no-repeat before:bg-cover before:bg-center before:z-[999]">
@@ -68,19 +55,15 @@ function App() {
           <h2 className="sr-only">Search for any IP address or domain </h2>
           <form
             className="w-full h-14 rounded-2xl relative overflow-hidden mb-6 md:mb-10 max-w-[34.6875rem] mx-auto border-none"
-            onSubmit={(e) => handleSubmit(e, inputValue)}
+            onSubmit={handleSubmit}
           >
             <input
-              value={inputValue}
-              onChange={(e) => setInputValue(e.target.value)}
               type="text"
               className=" w-full h-full outline none px-5 font-medium placeholder:text-darkGray text-veryDarkGray text-lg placeholder:text-sm md:placeholder:text-base placeholder:font-normal"
               placeholder="Search for any IP address or domain "
               aria-label="Search for any IP address or domain "
-              min={7}
-              max={15}
-              pattern="^((\d{1,2}|1\d\d|2[0-4]\d|25[0-5])\.){3}(\d{1,2}|1\d\d|2[0-4]\d|25[0-5])$"
-              required
+              value={ipAddess}
+              onChange={(e) => setIpAddess(e.target.value)}
             />
             <button
               className="absolute top-0 right-0 w-[3.625rem] h-full bg-veryDarkGray grid place-items-center hover:bg-veryDarkGray/[0.85] cursor-pointer border-none outline-none"
@@ -122,7 +105,7 @@ function App() {
             url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
           />
           <Marker position={map}>
-            <Popup>{`${city}, ${country}`}</Popup>
+            <Popup>{`${city}, ${country}`} </Popup>
           </Marker>
         </MapContainer>
       )}
