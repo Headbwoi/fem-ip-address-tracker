@@ -92,7 +92,7 @@ function App() {
             <span className=" hidden md:block  w-[1px] h-20 bg-darkGray "></span>
             <IpInfoDetails title="Location" value={`${city}, ${country}`} />
             <span className=" hidden md:block  w-[1px] h-20 bg-darkGray "></span>
-            <IpInfoDetails title="Timezone" value={`UTC - ${timezone}`} />
+            <IpInfoDetails title="Timezone" value={`UTC: ${timezone}`} />
             <span className=" hidden md:block  w-[1px] h-20 bg-darkGray "></span>
             <IpInfoDetails title="ISP" value={`${isp}`} />
           </div>
