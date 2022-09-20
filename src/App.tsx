@@ -44,6 +44,10 @@ function App() {
           <IpInfo />
         </section>
       </div>
+
+      <section className="">
+        <div className="map"></div>
+      </section>
     </main>
   )
 }
