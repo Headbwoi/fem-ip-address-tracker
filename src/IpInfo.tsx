@@ -2,6 +2,12 @@ interface InfoDetails {
   title: string
   value: string
 }
+interface Details {
+  ip: string
+  location: string
+  timezone: string
+  isp: string
+}
 const IpInfo = () => {
   return (
     <div className="w-full max-w-[69.375rem] min-h-[13.75rem] md:h-[10.3125rem] mx-auto rounded-xl bg-white shadow-xl py-6 md:py-0 md:px-7 xl:px-10 flex items-center flex-col gap-6 md:flex-row md:gap-10 lg:gap-14 ">
