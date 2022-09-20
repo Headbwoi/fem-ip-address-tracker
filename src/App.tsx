@@ -1,5 +1,6 @@
 import { useState } from "react"
 import IpInfo from "./IpInfo"
+import { MapContainer, TileLayer, useMap, Marker, Popup } from "react-leaflet"
 interface Details {
   ip: string
   location: string
@@ -9,15 +10,15 @@ interface Details {
 
 function App() {
   return (
-    <main className="w-full h-full relative before:absolute before:top-0 before:left-0 before:h-[18.75rem] lg:h-[17.5rem] before:w-screen before:bg-[url('/images/pattern-bg.png')] before:bg-no-repeat before:bg-cover before:bg-center">
+    <main className="w-full h-full relative before:absolute before:top-0 before:left-0 before:h-[18.75rem] lg:h-[17.5rem] before:w-screen before:bg-[url('/images/pattern-bg.png')] before:bg-no-repeat before:bg-cover before:bg-center before:z-[999]">
       <div className="container md:pt-8 px-6 md:px-10 lg:px-12 xl:px-0 relative">
-        <header className="py-7 text-center">
+        <header className="py-7 text-center relative z-[999]">
           <h1 className="text-xl md:text-2xl lg:text-3xl text-white font-bold">
             IP Address Tracker
           </h1>
         </header>
 
-        <section className="input">
+        <section className="input relative z-[999]">
           <h2 className="sr-only">Search for any IP address or domain </h2>
           <div className="w-full h-14 rounded-2xl relative overflow-hidden mb-6 md:mb-10 max-w-[34.6875rem] mx-auto border-none">
             <input
@@ -43,14 +44,25 @@ function App() {
           </div>
         </section>
 
-        <section className="ip-info absolute left-1/2 -translate-x-1/2">
+        <section className="ip-info absolute left-1/2 -translate-x-1/2 z-[999]">
           <h3 className="sr-only">
             information about the IP Address you provided
           </h3>
           <IpInfo />
         </section>
       </div>
-      <section className="h-96 w-screen"></section>
+
+      <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
+        <TileLayer
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        />
+        <Marker position={[51.505, -0.09]}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      </MapContainer>
     </main>
   )
 }
