@@ -1,4 +1,5 @@
-import { useState } from "react"
+import { FormEvent, useState } from "react"
+import axios from "axios"
 import IpInfo from "./IpInfo"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 
@@ -6,6 +7,8 @@ type Data = {
   location: {
     city: string
     country: string
+    lat: number | undefined
+    lng: number | undefined
     timezone: string
   }
   isp: string
@@ -13,12 +16,22 @@ type Data = {
 
 function App() {
   const [ipAddess, setIpAddess] = useState<string | number>()
-  const [location, setLocation] = useState<number[]>([])
-  const [timeZone, setTimeZone] = useState()
+  const [data, setData] = useState<Data>()
 
-  const handleSubmit = () => {
-    console.log("first")
+  const BaseUrl = `https://geo.ipify.org/api/v2/country,city?apiKey=&ipAddress=${ipAddess}`
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    axios
+      .get(BaseUrl)
+      .then((response) => {
+        setData(response.data)
+      })
+      .catch((error) => {
+        console.log(error)
+      })
   }
+  console.log(process.env.REACT_APP_GEO_API_KEY)
 
   return (
     <main className="w-full h-full relative before:absolute before:top-0 before:left-0 before:h-[18.75rem] lg:h-[17.5rem] before:w-screen before:bg-[url('/images/pattern-bg.png')] before:bg-no-repeat before:bg-cover before:bg-center before:z-[999]">
@@ -31,7 +44,10 @@ function App() {
 
         <section className="input relative z-[999]">
           <h2 className="sr-only">Search for any IP address or domain </h2>
-          <div className="w-full h-14 rounded-2xl relative overflow-hidden mb-6 md:mb-10 max-w-[34.6875rem] mx-auto border-none">
+          <form
+            className="w-full h-14 rounded-2xl relative overflow-hidden mb-6 md:mb-10 max-w-[34.6875rem] mx-auto border-none"
+            onSubmit={handleSubmit}
+          >
             <input
               type="text"
               name="ip"
@@ -44,7 +60,6 @@ function App() {
             <button
               className="absolute top-0 right-0 w-[3.625rem] h-full bg-veryDarkGray grid place-items-center hover:bg-veryDarkGray/[0.85] cursor-pointer border-none outline-none"
               aria-label="click to track ip provided"
-              onClick={() => handleSubmit()}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="11" height="14">
                 <path
@@ -55,19 +70,19 @@ function App() {
                 />
               </svg>
             </button>
-          </div>
+          </form>
         </section>
 
         <section className="ip-info absolute left-1/2 -translate-x-1/2 z-[999]">
           <h3 className="sr-only">
             information about the IP Address you provided
           </h3>
-          <IpInfo />
+          {/* <IpInfo ip={ipAddess} /> */}
         </section>
       </div>
 
       <MapContainer
-        center={[37.40599, -122.078514]}
+        center={[54.12, -122.078514]}
         zoom={13}
         scrollWheelZoom={false}
       >
@@ -76,9 +91,7 @@ function App() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         />
         <Marker position={[37.40599, -122.078514]}>
-          <Popup>
-            A pretty CSS3 popup. <br /> Easily customizable.
-          </Popup>
+          <Popup></Popup>
         </Marker>
       </MapContainer>
     </main>

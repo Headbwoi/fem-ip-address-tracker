@@ -8,7 +8,7 @@ interface Details {
   timezone: string
   isp: string
 }
-const IpInfo = () => {
+const IpInfo = ({ ip, location, timezone, isp }: Details) => {
   return (
     <div className="w-full max-w-[69.375rem] min-h-[13.75rem] md:h-[10.3125rem] mx-auto rounded-xl bg-white shadow-xl py-6 md:py-0 md:px-7 xl:px-10 flex items-center flex-col gap-6 md:flex-row md:gap-10 lg:gap-14 ">
       <IpInfoDetails title="IP Address" value="192.616.125.101" />
