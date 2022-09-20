@@ -3,21 +3,22 @@ interface InfoDetails {
   value: string
 }
 interface Details {
-  ip: string
-  location: string
-  timezone: string
-  isp: string
+  ip: string | number | undefined
+  country: string | undefined
+  city: string | undefined
+  timezone: string | undefined
+  isp: string | undefined
 }
-const IpInfo = ({ ip, location, timezone, isp }: Details) => {
+const IpInfo: React.FC<Details> = ({ ip, isp, timezone, city, country }) => {
   return (
     <div className="w-full max-w-[69.375rem] min-h-[13.75rem] md:h-[10.3125rem] mx-auto rounded-xl bg-white shadow-xl py-6 md:py-0 md:px-7 xl:px-10 flex items-center flex-col gap-6 md:flex-row md:gap-10 lg:gap-14 ">
-      <IpInfoDetails title="IP Address" value="192.616.125.101" />
+      <IpInfoDetails title="IP Address" value={`${ip}`} />
       <span className=" hidden md:block  w-[1px] h-20 bg-darkGray "></span>
-      <IpInfoDetails title="Location" value="kano Ng" />
+      <IpInfoDetails title="Location" value={`${city}, ${country}`} />
       <span className=" hidden md:block  w-[1px] h-20 bg-darkGray "></span>
-      <IpInfoDetails title="Timezone" value={`UTC - 05:00`} />
+      <IpInfoDetails title="Timezone" value={`UTC - ${timezone}`} />
       <span className=" hidden md:block  w-[1px] h-20 bg-darkGray "></span>
-      <IpInfoDetails title="ISP" value="SpaceX starlink" />
+      <IpInfoDetails title="ISP" value={`${isp}`} />
     </div>
   )
 }

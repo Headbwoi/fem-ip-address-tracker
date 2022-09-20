@@ -18,7 +18,9 @@ function App() {
   const [ipAddess, setIpAddess] = useState<string | number>()
   const [data, setData] = useState<Data>()
 
-  const BaseUrl = `https://geo.ipify.org/api/v2/country,city?apiKey=&ipAddress=${ipAddess}`
+  const BaseUrl = `https://geo.ipify.org/api/v2/country,city?apiKey=${
+    import.meta.env.GEO_API_KEY
+  }&ipAddress=${ipAddess}`
 
   const handleSubmit = (e: FormEvent) => {
     e.preventDefault()
@@ -31,7 +33,6 @@ function App() {
         console.log(error)
       })
   }
-  console.log(import.meta.env.GEO_API_KEY)
 
   return (
     <main className="w-full h-full relative before:absolute before:top-0 before:left-0 before:h-[18.75rem] lg:h-[17.5rem] before:w-screen before:bg-[url('/images/pattern-bg.png')] before:bg-no-repeat before:bg-cover before:bg-center before:z-[999]">
@@ -77,7 +78,13 @@ function App() {
           <h3 className="sr-only">
             information about the IP Address you provided
           </h3>
-          {/* <IpInfo ip={ipAddess} /> */}
+          <IpInfo
+            ip={ipAddess}
+            timezone={data?.location.timezone}
+            isp={data?.isp}
+            city={data?.location.city}
+            country={data?.location.country}
+          />
         </section>
       </div>
 
