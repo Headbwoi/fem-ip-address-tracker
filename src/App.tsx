@@ -7,51 +7,41 @@ interface InfoDetails {
 }
 
 function App() {
-  const [ipAddess, setIpAddess] = useState([])
-  const [ipValue, setIpValue] = useState("")
+  const [ipAddess, setIpAddess] = useState("")
   const [city, setCity] = useState("")
   const [country, setCountry] = useState("")
   const [timezone, setTimezone] = useState("")
   const [isp, setIsp] = useState("")
-  const [lat, setLat] = useState(0)
-  const [lng, setLng] = useState(0)
-  const [coords, setCoords] = useState([0, 0])
+  const [map, setMap] = useState(undefined)
 
-  const BaseUrl = `https://geo.ipify.org/api/v2/country,city?apiKey=at_LPFa8WF3jZXIkqgaF0eI0dxGPHMbA&ipAddress=${ipValue}`
+  const BaseUrl = `https://geo.ipify.org/api/v2/country,city?apiKey=at_LPFa8WF3jZXIkqgaF0eI0dxGPHMbA&ipAddress=${ipAddess}`
 
   const fetchData = async () => {
-    try {
-      const res = await fetch(BaseUrl)
-      const data = await res.json()
-      const { location } = data
-      const { city, country, timezone, lat, lng } = location
-      setIpAddess(data.ip)
-      setCity(city)
-      setCountry(country)
-      setTimezone(timezone)
-      setIsp(data.isp)
-      setLat(lat)
-      setLng(lng)
-      setCoords([lat, lng])
-    } catch (error) {
+    const res = await fetch(BaseUrl)
+    const data = await res.json().catch((error) => {
       console.log(error)
-    }
+    })
+    const { city, country, timezone } = data.location
+    setIpAddess(data.ip)
+    setCity(city)
+    setCountry(country)
+    setTimezone(timezone)
+    setIsp(data.isp)
+    const {
+      location: { lat, lng },
+    } = data
+    //@ts-ignore
+    setMap({ lat, lng })
   }
 
-  const handleSubmit = (e: FormEvent) => {
-    e.preventDefault()
-    // @ts-ignore
-    parseFloat(setIpAddess(ipValue))
-    fetchData()
-    setIpValue("")
-  }
-
-  const changeLocal = () => {
-    setCoords([lat, lng])
-  }
   useEffect(() => {
     fetchData()
   }, [])
+
+  const handleSubmit = (e: FormEvent) => {
+    e.preventDefault()
+    fetchData()
+  }
   return (
     <main className="w-full h-full relative before:absolute before:top-0 before:left-0 before:h-[18.75rem] lg:h-[17.5rem] before:w-screen before:bg-[url('/images/pattern-bg.png')] before:bg-no-repeat before:bg-cover before:bg-center before:z-[999]">
       <div className="container md:pt-8 px-6 md:px-10 lg:px-12 xl:px-0 relative">
@@ -72,13 +62,12 @@ function App() {
               className=" w-full h-full outline none px-5 font-medium placeholder:text-darkGray text-veryDarkGray text-lg placeholder:text-sm md:placeholder:text-base placeholder:font-normal"
               placeholder="Search for any IP address or domain "
               aria-label="Search for any IP address or domain "
-              value={ipValue}
-              onChange={(e) => setIpValue(e.target.value)}
+              value={ipAddess}
+              onChange={(e) => setIpAddess(e.target.value)}
             />
             <button
               className="absolute top-0 right-0 w-[3.625rem] h-full bg-veryDarkGray grid place-items-center hover:bg-veryDarkGray/[0.85] cursor-pointer border-none outline-none"
               aria-label="click to track ip provided"
-              onClick={changeLocal}
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="11" height="14">
                 <path
@@ -107,18 +96,19 @@ function App() {
           </div>
         </section>
       </div>
-
-      {/* @ts-ignore */}
-      <MapContainer center={coords} zoom={13} scrollWheelZoom={true}>
-        <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-          url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-        />
-        {/* @ts-ignore */}
-        <Marker position={coords}>
-          <Popup>{`${city}, ${country}`} </Popup>
-        </Marker>
-      </MapContainer>
+      {map == undefined ? (
+        <div className="loader"></div>
+      ) : (
+        <MapContainer id="map" center={map} zoom={13} scrollWheelZoom={false}>
+          <TileLayer
+            attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+            url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          />
+          <Marker position={map}>
+            <Popup>{`${city}, ${country}`} </Popup>
+          </Marker>
+        </MapContainer>
+      )}
     </main>
   )
 }
