@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.ip-info {
+  width: calc(100vw - 1.5rem);
+}
+
+@media (min-width: 768px) {
+  .ip-info {
+    width: calc(100vw - 2.5rem);
+  }
+}

@@ -20,7 +20,7 @@ export default IpInfo
 
 const IpInfoDetails = ({ title, value }: InfoDetails) => {
   return (
-    <div className="text-center md:text-left block w-1/4">
+    <div className="text-center md:text-left block md:w-1/4">
       <p className="text-xs md:text-sm text-darkGray uppercase font-medium md:mb-3">
         {title}
       </p>

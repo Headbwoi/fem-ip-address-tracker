@@ -37,7 +37,7 @@ function App() {
           </div>
         </section>
 
-        <section className="ip-info ">
+        <section className="ip-info absolute left-1/2 -translate-x-1/2">
           <h3 className="sr-only">
             information about the IP Address you provided
           </h3>
@@ -45,8 +45,8 @@ function App() {
         </section>
       </div>
 
-      <section className="">
-        <div className="map"></div>
+      <section className="bg-veryDarkGray w-screen min-h-full">
+        <div className="map min-h-[15rem]" id="map"></div>
       </section>
     </main>
   )
