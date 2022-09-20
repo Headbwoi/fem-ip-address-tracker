@@ -2,16 +2,6 @@ import { FormEvent, useEffect, useState } from "react"
 import axios from "axios"
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet"
 
-// type Data = {
-//   location: {
-//     city: string
-//     country: string
-//     lat: number | undefined
-//     lng: number | undefined
-//     timezone: string
-//   }
-//   isp: string
-// }
 interface InfoDetails {
   title: string
   value: string
