@@ -6,8 +6,18 @@
   width: calc(100vw - 1.5rem);
 }
 
+@media (min-width: 640px) {
+  .ip-info {
+    width: calc(100vw - 2.5rem);
+  }
+}
 @media (min-width: 768px) {
   .ip-info {
     width: calc(100vw - 2.5rem);
+  }
+}
+@media (min-width: 1024px) {
+  .ip-info {
+    width: calc(100vw - 3rem);
   }
 }

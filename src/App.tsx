@@ -1,7 +1,5 @@
 import { useState } from "react"
 import IpInfo from "./IpInfo"
-import { MapContainer, TileLayer, useMap } from "react-leaflet"
-
 interface Details {
   ip: string
   location: string
@@ -52,10 +50,7 @@ function App() {
           <IpInfo />
         </section>
       </div>
-
-      <section className="bg-veryDarkGray w-screen min-h-full">
-        <div className="map min-h-[15rem]" id="map"></div>
-      </section>
+      <section className="h-96 w-screen"></section>
     </main>
   )
 }
