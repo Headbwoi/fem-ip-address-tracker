@@ -31,7 +31,7 @@ function App() {
         console.log(error)
       })
   }
-  console.log(process.env.REACT_APP_GEO_API_KEY)
+  console.log(import.meta.env.GEO_API_KEY)
 
   return (
     <main className="w-full h-full relative before:absolute before:top-0 before:left-0 before:h-[18.75rem] lg:h-[17.5rem] before:w-screen before:bg-[url('/images/pattern-bg.png')] before:bg-no-repeat before:bg-cover before:bg-center before:z-[999]">
